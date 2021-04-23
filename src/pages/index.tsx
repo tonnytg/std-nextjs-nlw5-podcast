@@ -1,15 +1,18 @@
 // SPA -> Não é redenrizado pelo Crawler ou antes do usuário acessar
 // SSR -Static Server Side >
 // SSG Static Side Generation
+// import {useEffect} from "react";
 
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
-// import {useEffect} from "react";
 import {api} from "../services/api";
 import { format, parseISO } from 'date-fns'
 import ptBR from 'date-fns/locale/pt-BR'
-import {convertDurationToTimeString} from "../utils/convertDurationToTimeString";
 import Link from 'next/link'
+import {useContext} from "react";
+
+import {PlayerContext} from "../contexts/PlayerContext";
+import {convertDurationToTimeString} from "../utils/convertDurationToTimeString";
 
 import styles from './home.module.scss'
 
@@ -31,6 +34,8 @@ type HomeProps = {
 }
 
 export default function Home({ latestEpisodes, allEpisodes }:HomeProps ){
+    const { play } = useContext(PlayerContext)
+
   // // SPA React padrão
   // useEffect( () => {
   //   fetch('http://localhost:3001/episodes')
@@ -63,7 +68,7 @@ export default function Home({ latestEpisodes, allEpisodes }:HomeProps ){
                                   <span>{episode.durationAsString}</span>
                               </div>
 
-                              <button type="button">
+                              <button type="button" onClick={() => play(episode)}>
                                   <img src="/play-green.svg" alt="Tocar episódio" />
                               </button>
                           </li>
@@ -106,8 +111,8 @@ export default function Home({ latestEpisodes, allEpisodes }:HomeProps ){
                                 <td style={{ width: 100}}>{episode.publishedAt}</td>
                                 <td>{episode.durationAsString}</td>
                                 <td>
-                                    <button type="button">
-                                        <img src="/play-green.svg" alt="Tocar episó dio" />
+                                    <button type="button" onClick={() => play(episode)}>
+                                        <img src="/play-green.svg" alt="Tocar episódio" />
                                     </button>
                                 </td>
                             </tr>
