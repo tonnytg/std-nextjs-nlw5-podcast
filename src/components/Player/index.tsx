@@ -86,6 +86,7 @@ export default function Player() {
                     />
                 )}
 
+                // playNext and playPrevious
                 <div className={styles.buttons}>
                     <button type="button" disabled={!episode}>
                         <img src="/shuffle.svg" alt="Embaralhar" />
