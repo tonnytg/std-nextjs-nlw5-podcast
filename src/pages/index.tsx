@@ -4,6 +4,7 @@
 // import {useEffect} from "react";
 
 import { GetStaticProps } from 'next'
+import Head from 'next/head'
 import Image from 'next/image'
 import {api} from "../services/api";
 import { format, parseISO } from 'date-fns'
@@ -15,6 +16,7 @@ import {PlayerContext} from "../contexts/PlayerContext";
 import {convertDurationToTimeString} from "../utils/convertDurationToTimeString";
 
 import styles from './home.module.scss'
+import {homedir} from "os";
 
 type Episode = {
     id: string;
@@ -46,6 +48,9 @@ export default function Home({ latestEpisodes, allEpisodes }:HomeProps ){
   // }, []) //quando algo mudar faça algo sideEffect
   return (
       <div className={styles.homepage}>
+          <Head>
+              <title>Home | Podcastr</title>
+          </Head>
           <section className={styles.latestEpisodes}>
               <h2> Ultimos lançamentos</h2>
 
