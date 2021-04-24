@@ -24,7 +24,8 @@
 
   footer {
     align-self: stretch;
-    &.empty {
+
+    &.empty .progress {
       opacity: 0.5;
     }
   }
@@ -105,8 +106,9 @@
 
     transition: filter 0.2s;
 
-    &:disabled {
+    &:disabled  {
       cursor: default;
+      opacity: 0.5;
     }
 
     &:hover:not(:disabled) {
